@@ -1,0 +1,4 @@
+# 测试依赖（与运行依赖一并安装；许可 MIT / Apache-2.0）
+-r requirements.txt
+pytest==8.3.4
+pytest-asyncio==0.25.0

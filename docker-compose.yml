@@ -1,0 +1,104 @@
+# 骑手招聘 Agent 平台 — 可运行公共骨架（契约 v1 后端切片）
+# 用法：
+#   docker compose up -d db cache          # 只起依赖，本地跑 pytest / uvicorn
+#   docker compose up -d --build           # 一键起全栈（api + db + cache）
+# 端口可通过 .env 覆盖（见 .env.example）
+name: rider-platform-kit
+
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: rider-db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-rider}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-rider_dev_password}
+      POSTGRES_DB: ${POSTGRES_DB:-rider}
+      TZ: Asia/Shanghai
+    ports:
+      - "${DB_PORT:-55432}:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./backend/app/db/init.sql:/docker-entrypoint-initdb.d/01_init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-rider} -d ${POSTGRES_DB:-rider}"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+      start_period: 5s
+    restart: unless-stopped
+
+  cache:
+    image: valkey/valkey:8
+    container_name: rider-cache
+    command: ["valkey-server", "--appendonly", "yes"]
+    ports:
+      - "${CACHE_PORT:-56379}:6379"
+    volumes:
+      - cache-data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "valkey-cli ping | grep -q PONG"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+      start_period: 3s
+    restart: unless-stopped
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: rider-api
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-rider}:${POSTGRES_PASSWORD:-rider_dev_password}@db:5432/${POSTGRES_DB:-rider}
+      CACHE_URL: redis://cache:6379/0
+      LLM_MODE: ${LLM_MODE:-mock}
+      LLM_BASE_URL: ${LLM_BASE_URL:-}
+      LLM_MODEL: ${LLM_MODEL:-gpt-4o-mini}
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      LLM_TIMEOUT_SECONDS: ${LLM_TIMEOUT_SECONDS:-5}
+      JWT_SECRET: ${JWT_SECRET:-dev-only-jwt-secret-change-me}
+      VAULT_KEY: ${VAULT_KEY:-dev-only-vault-key-change-me-32bytes!!}
+      WEBHOOK_SECRET: ${WEBHOOK_SECRET:-dev-only-webhook-secret}
+      AUTO_INIT: "1"
+      AUTO_SEED: "1"
+      TZ: Asia/Shanghai
+    ports:
+      - "${API_PORT:-8000}:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health', timeout=3).status==200 else 1)\""]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+      args:
+        # 同源反代前缀：浏览器请求 /proxy/api/v1/... → nginx → api:8000
+        VITE_API_BASE: ${VITE_API_BASE:-/proxy}
+    container_name: rider-web
+    ports:
+      - "${WEB_PORT:-8081}:80"
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://127.0.0.1/healthz | grep -q ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    restart: unless-stopped
+
+volumes:
+  db-data:
+  cache-data:
+

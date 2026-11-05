@@ -1,0 +1,22 @@
+{
+  "name": "rider-platform-web",
+  "private": true,
+  "version": "1.0.0",
+  "description": "骑手招聘 Agent 平台前端骨架：H5 求职者端 + Ant Design 招聘工作台/驾驶舱",
+  "workspaces": [
+    "h5",
+    "admin"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev:h5": "npm run dev -w h5",
+    "dev:admin": "npm run dev -w admin",
+    "build": "npm run build -w h5 && npm run build -w admin",
+    "build:h5": "npm run build -w h5",
+    "build:admin": "npm run build -w admin",
+    "preview:h5": "npm run preview -w h5",
+    "preview:admin": "npm run preview -w admin"
+  }
+}

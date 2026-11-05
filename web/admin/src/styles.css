@@ -1,0 +1,562 @@
+/* =========================================================
+   招聘专员工作台（Ant Design）全局样式
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f4f6fa;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.admin-layout {
+  min-height: 100vh;
+}
+
+/* ---------- 侧边栏 ---------- */
+.admin-sider {
+  position: relative;
+}
+
+.admin-sider .ant-layout-sider-children {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.admin-sider .ant-menu {
+  flex: 1;
+  overflow: auto;
+}
+
+.sider-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 16px 14px;
+  color: #fff;
+}
+
+.sider-logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #1677ff, #69b1ff);
+  font-weight: 700;
+  font-size: 16px;
+  flex: 0 0 auto;
+}
+
+.sider-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.sider-sub {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.sider-foot {
+  padding: 12px 16px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.user-card {
+  padding: 2px 0;
+}
+
+.user-name {
+  font-weight: 600;
+}
+
+.user-meta {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+/* ---------- 顶栏 / 内容 ---------- */
+.admin-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  height: auto;
+  min-height: 64px;
+  padding: 10px 20px;
+  background: #fff;
+  border-bottom: 1px solid #eef0f4;
+}
+
+.header-title {
+  margin: 0 !important;
+}
+
+.header-user {
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.header-user:hover {
+  background: #f5f7fa;
+}
+
+.header-user-name {
+  font-weight: 600;
+}
+
+.header-user-no {
+  color: #8c8c8c;
+  font-size: 12px;
+}
+
+.admin-content {
+  padding: 20px;
+  min-height: calc(100vh - 64px);
+}
+
+.page-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card-note {
+  color: #8c8c8c;
+  font-size: 12px;
+  margin: 8px 0 0;
+}
+
+.muted {
+  color: #8c8c8c;
+}
+
+.small {
+  font-size: 12px;
+}
+
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+}
+
+.list-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ---------- 全局水印 ---------- */
+.watermark-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  background-repeat: repeat;
+}
+
+/* ---------- 登录页 ---------- */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 18% 18%, #e6f1ff 0, transparent 42%),
+    radial-gradient(circle at 82% 8%, #eef7ff 0, transparent 38%),
+    #f5f7fb;
+}
+
+.login-brand {
+  text-align: center;
+}
+
+.login-logo {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 10px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #1677ff, #69b1ff);
+  box-shadow: 0 8px 20px rgba(22, 119, 255, 0.28);
+}
+
+.login-brand h1 {
+  margin: 0;
+  font-size: 24px;
+  color: #1f2329;
+}
+
+.login-brand p {
+  margin: 6px 0 0;
+  color: #8c8c8c;
+  font-size: 13px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 430px;
+  border-radius: 14px;
+  box-shadow: 0 14px 44px rgba(15, 23, 42, 0.1);
+}
+
+.login-foot {
+  margin: 14px 0 0;
+  color: #8c8c8c;
+  font-size: 12px;
+}
+
+/* ---------- 完整号码弹窗 ---------- */
+.detokenize-value {
+  margin: 16px 0;
+  padding: 18px;
+  text-align: center;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  word-break: break-all;
+  color: #1f2329;
+  background: #f6ffed;
+  border: 1px dashed #b7eb8f;
+  border-radius: 10px;
+}
+
+/* ---------- 驾驶舱 ---------- */
+.kpi-card {
+  height: 100%;
+}
+
+.kpi-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.kpi-label {
+  color: #595959;
+  font-size: 13px;
+}
+
+.kpi-unit {
+  font-size: 13px;
+  color: #8c8c8c;
+  margin-left: 4px;
+}
+
+.trend {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 34px;
+  margin-top: 10px;
+}
+
+.trend i {
+  flex: 1;
+  min-height: 4px;
+  border-radius: 2px 2px 0 0;
+  background: linear-gradient(180deg, #69b1ff, #1677ff);
+  opacity: 0.86;
+}
+
+.funnel-row {
+  margin-bottom: 12px;
+}
+
+.funnel-label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 2px;
+}
+
+.funnel-rate {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+.channel-row {
+  margin-bottom: 10px;
+}
+
+.channel-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+/* ---------- 候选人详情 ---------- */
+.detail-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.detail-name {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.qual-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.rule-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 5px 0;
+  border-bottom: 1px dashed #f0f0f0;
+  font-size: 13px;
+}
+
+.rule-row:last-child {
+  border-bottom: 0;
+}
+
+.audit-item {
+  font-size: 13px;
+}
+
+.audit-reason {
+  margin-top: 2px;
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+.transcript {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 300px;
+  overflow: auto;
+  padding: 4px;
+}
+
+.transcript-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.transcript-row.user {
+  flex-direction: row-reverse;
+}
+
+.transcript-role {
+  flex: 0 0 auto;
+  padding-top: 5px;
+  font-size: 11px;
+  color: #8c8c8c;
+}
+
+.transcript-bubble {
+  max-width: 80%;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #f5f7fa;
+  font-size: 13px;
+}
+
+.transcript-row.ai .transcript-bubble {
+  background: #e6f4ff;
+}
+
+.transcript-row.user .transcript-bubble {
+  background: #f0f0f0;
+}
+
+/* ---------- 面试日程 ---------- */
+.week-grid {
+  overflow: auto;
+}
+
+.week-head {
+  display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.week-gutter {
+  flex: 0 0 64px;
+  padding: 8px;
+  font-size: 12px;
+  color: #8c8c8c;
+  border-right: 1px solid #f0f0f0;
+}
+
+.week-day {
+  flex: 1;
+  min-width: 70px;
+  padding: 8px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+  border-right: 1px solid #f5f5f5;
+}
+
+.week-day span {
+  font-size: 11px;
+  color: #8c8c8c;
+}
+
+.week-day-today {
+  background: #e6f4ff;
+}
+
+.week-row {
+  display: flex;
+  min-height: 64px;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.week-cell {
+  flex: 1;
+  min-width: 70px;
+  min-height: 64px;
+  padding: 3px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  border-right: 1px solid #f5f5f5;
+}
+
+.week-cell.today {
+  background: #f7fbff;
+}
+
+.itv-block {
+  padding: 3px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  text-align: left;
+  font-size: 11px;
+  color: inherit;
+  background: #fffbe6;
+  border: 0;
+  border-left: 3px solid #faad14;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.itv-block b {
+  font-size: 12px;
+}
+
+.itv-block span {
+  color: #8c8c8c;
+}
+
+.itv-block:hover {
+  filter: brightness(0.97);
+}
+
+.itv-done {
+  background: #f6ffed;
+  border-left-color: #52c41a;
+}
+
+.itv-no_show {
+  background: #fff1f0;
+  border-left-color: #ff4d4f;
+}
+
+.itv-tag {
+  width: fit-content;
+  margin: 0 !important;
+  font-size: 10px !important;
+  line-height: 14px !important;
+}
+
+.day-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.day-itv {
+  display: flex;
+  gap: 14px;
+  padding: 10px 12px;
+  text-align: left;
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.day-itv:hover {
+  background: #f0f8ff;
+  border-color: #91caff;
+}
+
+.day-itv-time {
+  flex: 0 0 64px;
+  display: flex;
+  flex-direction: column;
+}
+
+.day-itv-time b {
+  font-size: 15px;
+}
+
+.day-itv-time span {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+.day-itv-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.clickable-tag {
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .admin-content {
+    padding: 12px;
+  }
+}
